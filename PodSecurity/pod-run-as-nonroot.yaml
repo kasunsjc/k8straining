@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-runas-non-root
+spec:
+  containers:
+    - image:  alpine
+      name:  pod-user-id
+      command: ["/bin/sleep", "999999"]
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 405 #if doesn't specify Pod wouldn't start

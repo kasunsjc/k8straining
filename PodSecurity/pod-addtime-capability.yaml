@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-addtime-capability
+spec:
+  containers:
+    - image:  alpine
+      name:  pod-user-id
+      command: ["/bin/sleep", "999999"]
+      securityContext:
+        capabilities:
+          add:
+          - SYS_TIME

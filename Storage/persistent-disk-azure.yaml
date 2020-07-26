@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mongo-pv
+spec:
+  accessModes:
+    - ReadWriteMany
+    - ReadWriteOnce
+  capacity:
+    storage: 10Gi
+  persistentVolumeReclaimPolicy: Retain
+  azureDisk:
+    diskName: mongodb
+    diskURI: /subscriptions/43b3f2ee-7c26-4ac9-b907-0fd7ce508380/resourceGroups/MC_kubecluster_kubecluster-demo_southeastasia/providers/Microsoft.Compute/disks/mongodb
+    fsType: ext4
+    kind: Managed

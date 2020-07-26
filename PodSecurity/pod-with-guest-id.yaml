@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-user-id
+spec:
+  containers:
+    - image:  alpine
+      name:  pod-user-id
+      command: ["/bin/sleep", "999999"]
+      securityContext:
+        runAsUser: 405
