@@ -1,0 +1,70 @@
+
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: kubia-rc-node
+  labels:
+    app: kubia-node
+    env: dev
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: kubia-node
+  template:
+    metadata:
+      labels:
+        app: kubia-node
+    spec:
+      containers:
+        - image:  kasunsjc/kubia
+          name:  kubia-node
+          ports:
+          - name:  http
+            containerPort:  8080
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 150m
+              memory: 100Mi
+            requests:
+              cpu: 100m
+              memory: 50Mi
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: kubia-nodeport
+spec:
+  type: NodePort
+  ports:
+    - targetPort: 8080
+      port: 80
+      nodePort: 30000
+  selector:
+    app: kubia-node 
+---
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: kubia-ingress
+  labels:
+    app: kubia
+    env: dev
+spec:
+  tls:
+  - hosts:
+    - kubia.cloudlife.info
+    secretName: tls-secret
+  rules:
+  - host: kubia.cloudlife.info
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: kubia-nodeport
+          servicePort: 80
+          

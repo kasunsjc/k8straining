@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kubia-manual
+  labels:
+    app: frontend
+    create: manual
+    env: dev
+spec:
+  containers:
+    - image:  kasunsjc/kubia
+      name:  kubia
+      ports:
+      - containerPort: 8080
+        protocol: TCP
+      resources:
+        limits:
+          cpu: 300m
+          memory: 200Mi
+        requests:
+          cpu: 100m
+          memory: 100Mi

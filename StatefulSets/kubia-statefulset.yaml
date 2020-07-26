@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: kubia-stateful
+  labels:
+    app: kubia
+    env: dev
+spec:
+  replicas: 2
+  serviceName: stateful-svc
+  selector:
+    matchLabels:
+      app: kubia
+  template:
+    metadata:
+      labels:
+        app: kubia
+    spec:
+      containers:
+        - name: kubia
+          image: kasunsjc/kubia-pet
+          ports:
+            - containerPort: 8080
+              name: http
+          volumeMounts:
+            - mountPath: /var/deta
+              name: data
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 30Gi
+

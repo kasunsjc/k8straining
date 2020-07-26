@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-shared-volume-fsgroup
+spec:
+  securityContext:
+    fsGroup: 555
+    supplementalGroups:
+      - 666
+      - 777
+  containers:
+    - image: alpine
+      name: first
+      command: ["/bin/sleep", "99999"]
+      securityContext:
+        runAsUser: 1111
+      volumeMounts:
+        - name: shared-volume
+          mountPath: /volume
+          readOnly: false
+    - image: alpine
+      name: second
+      command: ["/bin/sleep", "99999"]
+      securityContext:
+        runAsUser: 2222
+      volumeMounts:
+        - name: shared-volume
+          mountPath: /volume
+          readOnly: false
+  volumes:
+    - name: shared-volume
+      emptyDir:
+          {}

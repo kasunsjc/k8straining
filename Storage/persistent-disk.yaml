@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mongodb
+  labels:
+    app: mongo
+    env: dev
+spec:
+  containers:
+    - image:  mongodb
+      name: mongo
+      ports:
+      - containerPort: 27017
+        protocol: TCP
+      volumeMounts:
+        - name:  mongo-vol
+          mountPath: /data/db
+  volumes:
+    - name:  mongo-vol
+      azureDisk:
+        diskName: mongodb
+        diskURI: /subscriptions/f0cfafe0-f47f-4c08-85d8-0f48206cf02a/resourceGroups/MC_akslabdemo_aksdevops_southeastasia/providers/Microsoft.Compute/disks/mongodb
+        kind: Managed
+        fsType: ext4

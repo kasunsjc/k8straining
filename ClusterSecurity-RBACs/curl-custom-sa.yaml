@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: curl-custom-sa
+  labels:
+    app: front
+    env: dev
+spec:
+  serviceAccountName: default
+  containers:
+    - image:  tutum/curl
+      name: main
+      command: ["sleep", "99999999"]
+    - image:  luksa/kubectl-proxy:1.6.2
+      name: ambassador

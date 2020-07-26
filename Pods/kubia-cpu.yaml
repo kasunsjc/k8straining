@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kubia-gpu
+  labels:
+    app: front
+    env: dev
+spec:
+  nodeSelector:
+    cpu: "true"
+  containers:
+    - image:  kasunsjc/kubia
+      name:  kubia
+      resources:
+        requests:
+          cpu: 100m
+          memory: 10Mi
+        limits:
+          cpu: 200m
+          memory: 50Mi
