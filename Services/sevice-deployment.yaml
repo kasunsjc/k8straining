@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubia
+  labels:
+    app: kubia
+    env: dev
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: kubia
+  template:
+    metadata:
+      name: kubia
+      labels:
+        app: kubia
+        env: dev
+    spec:
+      containers:
+        - image: kasunsjc/kubia:v1
+          name:  nodejs
+          resources:
+            limits:
+              cpu: 100m
+              memory: 100Mi
+            requests:
+              cpu: 50m
+          
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kubia-deploy-svc
+  labels:
+    app: kubia
+    env: dev
+spec:
+  type: ClusterIP
+  selector:
+    app: kubia
+  ports:
+    - port: 80
+      targetPort: 8080
