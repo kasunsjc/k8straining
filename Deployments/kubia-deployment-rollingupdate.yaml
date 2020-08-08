@@ -1,9 +1,12 @@
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kubia
+  name: kubia-rollingupdate
 spec:
-  replicas: 3
+  selector:
+    matchLabels:
+      app: kubia-rollingupdate
+  replicas: 10
   minReadySeconds: 10
   strategy:
     rollingUpdate:
@@ -14,13 +17,26 @@ spec:
     metadata:
       name: kubia
       labels:
-        app: kubia
+        app: kubia-rollingupdate
     spec:
       containers:
-      - image: kasunsjc/kubia:v3
+      - image: kasunsjc/kubia:v1
         name: nodejs
         readinessProbe:
           periodSeconds: 1
           httpGet:
             path: /
             port: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kubia
+spec:
+  type: LoadBalancer
+  selector:
+    app: kubia-rollingupdate
+  ports:
+  - port: 80
+    targetPort: 8080
+

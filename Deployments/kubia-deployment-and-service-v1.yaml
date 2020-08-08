@@ -6,12 +6,7 @@ spec:
   selector:
     matchLabels:
       app: kubia
-  replicas: 3
-  strategy:
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 1
-    type: RollingUpdate
+  replicas: 10
   template:
     metadata:
       name: kubia
@@ -21,6 +16,9 @@ spec:
       containers:
       - image: kasunsjc/kubia:v2
         name: nodejs
+        ports:
+        - containerPort: 8080
+          protocol: TCP
 ---
 apiVersion: v1
 kind: Service
