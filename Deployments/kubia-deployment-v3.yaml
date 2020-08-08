@@ -5,8 +5,9 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: kubia
+      app: kubia 
   replicas: 3
+  minReadySeconds: 10
   template:
     metadata:
       name: kubia
@@ -14,5 +15,5 @@ spec:
         app: kubia
     spec:
       containers:
-      - image: kasunsjc/kubia:v1
+      - image: kasunraj/kubia:v3
         name: nodejs
