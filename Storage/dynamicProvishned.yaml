@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mongo-dynamic
+  labels:
+    name: mongo-dynamic
+spec:
+  containers:
+  - name: mongodb
+    image: mongo
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 27017
+    volumeMounts:
+      - name: pvc-vol
+        mountPath: /data/db
+  volumes:
+    - name:  pvc-vol
+      persistentVolumeClaim:
+        claimName: mongodb-pvc
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongodb-pvc
+spec:
+  resources:
+    requests:
+      storage: 10Gi
+  accessModes :
+  - ReadWriteOnce
+  storageClassName: slow

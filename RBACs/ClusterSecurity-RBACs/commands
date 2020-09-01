@@ -1,0 +1,29 @@
+kubectl create ns foo
+
+kubectl run test --image=luksa/kubectl-proxy -n foo
+
+kubectl create ns bar
+
+kubectl run test --image=luksa/kubectl-proxy -n bar
+
+# SSH to pod in foo
+kubectl exec -it test-145485760-ttq36 -n foo sh
+
+# exicte the following inside the pod
+curl localhost:8001/api/v1/namespaces/foo/services
+
+# Create Role in foo namespaces
+kubectl apply -f service-reader-role.yaml -n foo
+
+# Bind the role to default service account 
+kubectl create rolebinding test --role=service-reader --serviceaccount=foo:default -n foo
+
+###################ClusterRole & ClusterRoleBindings##############################
+
+kubectl create clusterrole pv-reader --verb=get,list --resource=persistentvolume
+
+kubectl get clusterrole pv-reader -o yaml
+
+kubectl create clusterrolebinding pv-test --clusterrole=pv-reader --serviceaccount=foo:default
+
+kubectl get rolebindings pv-test -o yaml
