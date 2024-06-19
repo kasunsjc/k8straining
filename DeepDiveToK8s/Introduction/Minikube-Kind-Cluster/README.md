@@ -117,7 +117,7 @@ kubectl cluster-info --context kind-kind
 ### Delete Kind Cluster
 
 ```bash
-kind delete cluster
+kind delete cluster --name learn-k8s
 ```
 
 When using minikube you can use the following command to see the procsess running.
