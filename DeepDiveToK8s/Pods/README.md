@@ -26,21 +26,6 @@ A Pod goes through several phases during its lifecycle:
 3. Succeeded: All containers in the Pod have terminated in success, and will not be restarted.
 4. Failed: All containers in the Pod have terminated, and at least one container has terminated in failure.
 5. Unknown: The state of the Pod cannot be determined.
-6. Completed: The Pod has terminated, but some containers may be in a waiting or terminated state.
-7. CrashLoopBackOff: The Pod is repeatedly crashing and restarting.
-8. Terminating: The Pod is being terminated by the system.
-9. ContainerCreating: The Pod has been accepted by the system, but the containers are still being created.
-10. ContainerRunning: The containers in the Pod are running.
-11. ContainerTerminated: The containers in the Pod have terminated.
-12. ContainerWaiting: The containers in the Pod are waiting to start.
-13. PodInitializing: The Pod is initializing.
-14. PodRunning: The Pod is running.
-15. PodSucceeded: The Pod has succeeded.
-16. PodFailed: The Pod has failed.
-17. PodUnknown: The state of the Pod is unknown.
-18. PodCompleted: The Pod has completed.
-19. PodCrashLoopBackOff: The Pod is in a crash loop back off state.
-
 
 ### Dive Deep in to Pod scheduling
 
