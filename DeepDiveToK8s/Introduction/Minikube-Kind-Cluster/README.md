@@ -24,6 +24,13 @@ For other platforms, you can download the binary from the [official website](htt
 
 ### Start Minikube
 
+If you want to setup the memory and cpu usage for Minikube, you can use the following command.
+
+```bash	
+minikube config set cpus 1
+minikube config set memory 1024
+```
+
 ```bash
 minikube start
 ```

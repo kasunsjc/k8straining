@@ -71,3 +71,43 @@ kubectl expose deployment my-app-deployment --type=LoadBalancer --port=8080
 ```
 
 Remember to replace `my-app-deployment` with the name of your deployment.
+
+
+## Rolling Updates with Deployments
+
+The RollingUpdate strategy minimizes downtime by gradually replacing old containers with new ones across ReplicaSets. It allows for controlled rollout rates through `maxSurge` and `maxUnavailable` settings, which dictate the number of Pods that can be added or removed, calculated as absolute numbers or percentages of desired replicas. Defaults for both are 25%. The `minReadySeconds` parameter defines how long a Pod must be ready before it's considered available, aiding in stability and troubleshooting during updates.
+
+![How rolling update works](./images/image.png)
+
+### Using maxSurge and maxUnavailable
+
+####  Pods are replaced when maxSurge is 0 and maxUnavailable is 1
+
+![alt text](./images/maxsurge0-maxunavilable1.png)
+
+#### Pods are replaced when maxSurge is 1 and maxUnavailable is 0
+
+![alt text](./images/maxsurge1-maxunavilable0.png)
+
+#### Pods are replaced when both maxSurge and maxUnavailable are 1
+
+![alt text](./images/maxsurge1-maxunavilable1.png)
+
+### Canary Deployments with Deployments
+
+Canary deployments are a way to test new versions of an application in production by gradually rolling out the new version to a subset of users. This allows you to validate the new version in a controlled manner before rolling it out to the entire user base. In Kubernetes, you can achieve canary deployments using multiple strategies, such as traffic splitting, custom resource definitions, or service meshes.
+
+![alt text](./images/canery-deployment.png)
+
+### Blue-Green Deployments with Deployments
+
+Blue-green deployments involve maintaining two identical environments, the "blue" and the "green" environment. You deploy new versions to the "green" environment and switch traffic to it once it's ready. This approach minimizes downtime and allows for easy rollback if any issues arise. In Kubernetes, you can achieve blue-green deployments using multiple strategies, such as service selectors, Ingress controllers, or custom resource definitions.
+
+![alt text](./images/blue-green-deployment.png)
+
+
+### A/B Testing with Deployments
+
+A/B testing is a way to compare two versions of an application to determine which one performs better. In Kubernetes, you can achieve A/B testing using multiple strategies, such as traffic splitting, custom resource definitions, or service meshes. By comparing the performance of different versions of your application, you can make data-driven decisions to improve user experience and optimize your application.
+
+![alt text](./images/a-b-testing.png)
