@@ -6,16 +6,33 @@ A Pod is the smallest and simplest unit in the Kubernetes object model. It repre
 ### Multiple Containers in a Pod:
 Kubernetes allows running multiple containers within a single Pod. This can be useful for scenarios where multiple processes need to run together and share resources. There are several mechanisms for using multiple containers in a Pod:
 
-1. Sidecar Pattern:
-The sidecar pattern involves running an additional container alongside the main container in a Pod. The sidecar container provides additional functionality or support to the main container. For example, a sidecar container can handle logging, monitoring, or data synchronization tasks.
-
-1. Init Container:
-An init container is a special type of container that runs and completes before the main container starts. Init containers are used for performing initialization tasks such as setting up configuration files, downloading dependencies, or waiting for external services to be available.
-
-1. Other Container Patterns:
-Apart from the sidecar and init container patterns, there are other container patterns that can be used in Kubernetes Pods. Some examples include the ambassador pattern, adapter pattern, and proxy pattern. These patterns provide different ways to structure and manage multiple containers within a Pod.
+1. Sidecar Pattern
+2. Init Container
+3. Adapter Pattern
+4. Ambassador Pattern 
 
 Note: It's important to carefully design and configure multiple containers in a Pod to ensure proper coordination and resource utilization.
+
+
+## Sidecar Pattern:
+The sidecar pattern involves running an additional container alongside the main container in a Pod. The sidecar container provides additional functionality or support to the main container. For example, a sidecar container can handle logging, monitoring, or data synchronization tasks.
+
+![alt text](./images/sidecare-pattern.png)
+
+## Init Container:
+An init container is a special type of container that runs and completes before the main container starts. Init containers are used for performing initialization tasks such as setting up configuration files, downloading dependencies, or waiting for external services to be available.
+
+![Sidecar Pattern](./images/init-containers.png)
+
+## Adapter Pattern:
+The adapter pattern involves running a separate container in a Pod that acts as an adapter between the main container and the external system. The adapter container can handle tasks such as data transformation, protocol conversion, or authentication.
+
+![alt text](./images/adapter-pattern.png)
+
+## Ambassador Pattern:
+The Ambassador pattern is a specialized sidecar responsible for hiding external complexities and providing a unified interface for accessing services outside the Pod. In this chapter, you will see how the Ambassador pattern can act as a proxy and decouple the main container from directly accessing external dependencies. The ambassador container can handle tasks such as routing, load balancing, or service discovery.
+
+![alt text](./images/ambassador-pattern.png)
 
 ### Pod Lifecycle:
 
