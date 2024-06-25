@@ -10,6 +10,10 @@ Deployments in Kubernetes are a powerful way to manage and scale applications. T
 
 3. **Canary Deployments**: Canary deployments involve gradually rolling out new versions to a subset of users or traffic. This allows you to test the new version in a controlled manner before rolling it out to the entire user base.
 
+4. **A/B Testing**: A/B testing involves comparing two versions of an application to determine which one performs better. By splitting traffic between the two versions, you can gather data and make informed decisions to improve user experience.
+
+5. **Recreate Deployments**: This strategy involves terminating all instances of the old version before deploying the new version. While it may result in downtime, it ensures a clean and consistent deployment.
+
 ## Advantages of Using Deployments
 
 - **Rollback Capability**: Deployments provide an easy way to roll back to a previous version in case of issues or failures. This ensures that your application remains stable and minimizes downtime.
