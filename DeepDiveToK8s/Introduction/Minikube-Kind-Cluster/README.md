@@ -27,8 +27,8 @@ For other platforms, you can download the binary from the [official website](htt
 If you want to setup the memory and cpu usage for Minikube, you can use the following command.
 
 ```bash	
-minikube config set cpus 1
-minikube config set memory 1024
+minikube config set cpus 2
+minikube config set memory 2048
 ```
 
 ```bash
@@ -45,6 +45,13 @@ You can create multi nodes cluster with Minikube.
 
 ```bash
 minikube start --nodes 3 -p learn-k8s
+```
+
+Create a high availability cluster with 6 nodes. Need Minikube 1.32 or later.
+To chose the network plugin, you can use the flag `--network-plugin`.
+```bash
+minikube start --ha --nodes 6 --network-plugin calico -p learn-k8s
+minikube start --ha --nodes 6 -p learn-k8s # default network plugin is kindnet
 ```
 
 ### Access Minikube Dashboard
