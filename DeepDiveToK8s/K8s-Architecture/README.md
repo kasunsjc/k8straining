@@ -204,3 +204,15 @@ spec:
     name: usr-share-ca-certificates
 status: {}
 ```
+
+## Dive in to Worker Node Components
+
+Worker node components are such as Kubelet, Kube-proxy, and Container Runtime. kube-proxy is a network proxy that runs on each worker node and is responsible for managing network connectivity between pods and services. The kubelet is an agent that runs on each worker node and is responsible for managing the containers on that node. The container runtime is responsible for running the containers on the worker nodes. Kubernetes supports several container runtimes, including Docker and containerd.
+
+
+### Kubelet
+
+We can view the kubelet configuration file by running the below command:
+
+```bash
+
