@@ -215,4 +215,33 @@ Worker node components are such as Kubelet, Kube-proxy, and Container Runtime. k
 We can view the kubelet configuration file by running the below command:
 
 ```bash
+# Login to the worker node/control node
 
+docker exec -it <NodeName> bash
+
+systemctl status kubelet  # can see the kubelet service status
+```
+You can find the similar output as below:
+
+```bash
+● kubelet.service - kubelet: The Kubernetes Node Agent
+     Loaded: loaded (/lib/systemd/system/kubelet.service; disabled; vendor preset: enabled)
+    Drop-In: /etc/systemd/system/kubelet.service.d
+             └─10-kubeadm.conf
+     Active: active (running) since Thu 2024-07-04 21:11:54 UTC; 4min 50s ago
+       Docs: http://kubernetes.io/docs/
+   Main PID: 2314 (kubelet)
+      Tasks: 19 (limit: 4700)
+     Memory: 63.0M
+        CPU: 15.352s
+     CGroup: /system.slice/kubelet.service
+             └─2314 /var/lib/minikube/binaries/v1.30.0/kubelet --bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --config=/var/lib/kubelet/config.yaml --hostname-override=k8-lab --kubeconfig=/etc/kubernetes/kubelet.conf --node-ip=192.168.85.2
+```
+
+### Kube-proxy
+
+kube-proxy is a network proxy that runs on each worker node and is responsible for managing network connectivity between pods and services. You can view the kube-proxy configuration file by running the below command:
+
+```bash
+k exec -it -n kube-system kube-proxy-748hp cat /var/lib/kube-proxy/config.conf
+```
