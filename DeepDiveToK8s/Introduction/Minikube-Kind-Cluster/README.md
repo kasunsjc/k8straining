@@ -136,4 +136,4 @@ kind delete cluster --name learn-k8s
 
 ## Conclusion
 
-Minikube and Kind are two popular tools to create Kubernetes clusters for local development. Minikube is a single-node cluster that runs inside a VM on your laptop, while Kind is a tool for running local Kubernetes clusters using Docker container “nodes”. Both tools are easy to use and provide a great way to get started with Kubernetes.
+Minikube and Kind are two popular tools to create Kubernetes clusters for local development. Minikube is a single-node/multi-node cluster that runs inside a VM on your laptop, while Kind is a tool for running local Kubernetes clusters using Docker container “nodes”. Both tools are easy to use and provide a great way to get started with Kubernetes.
